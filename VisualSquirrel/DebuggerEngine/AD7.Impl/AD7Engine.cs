@@ -381,6 +381,7 @@ namespace VisualSquirrel.Debugger.Engine
                 int connectiondelay = Int32.Parse(root.GetAttribute("connectiondelay"));
                 bool autoruninterpreter = Boolean.Parse(root.GetAttribute("autoruninterpreter"));
                 bool suspendonstartup = Boolean.Parse(root.GetAttribute("suspendonstartup"));
+                bool gonutsextension = Boolean.Parse(root.GetAttribute("gonutsextension"));
                 List<SquirrelDebugFileContext> ctxs = new List<SquirrelDebugFileContext>();
                 foreach (XmlElement e in doc.GetElementsByTagName("context"))
                 {
@@ -437,6 +438,7 @@ namespace VisualSquirrel.Debugger.Engine
                 debuggedProcess.IpAddress = ipaddress;
                 debuggedProcess.IpPort = ipport;
                 debuggedProcess.SuspendOnStartup = suspendonstartup;
+                debuggedProcess.Gonuts = gonutsextension;
                 debuggedProcess.FileContexts = ctxs.ToArray();
                 //debuggedProcess.ConnectionTries = connectiontries;
                 //debuggedProcess.ConnectionDelay = connectiondelay;

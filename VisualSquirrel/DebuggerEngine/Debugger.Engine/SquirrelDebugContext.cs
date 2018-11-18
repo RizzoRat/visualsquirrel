@@ -170,6 +170,7 @@ namespace VisualSquirrel.Debugger.Engine
         string pathFixup = "";
         string addFix = null;
         string removeFix = null;
+        bool gonuts = false;
 
         public List<SquirrelStackFrame> StackFrames
         {
@@ -192,6 +193,7 @@ namespace VisualSquirrel.Debugger.Engine
             unpackTypesMap.Add("y", "class");
             unpackTypesMap.Add("b", "bool");
             unpackTypesMap.Add("h", "thread");
+            unpackTypesMap.Add("rh", "realthread"); //gonuts thread
         }
         SquirrelDebugFileContext[] fileContexts;
         public SquirrelDebugContext(DebuggerHandler callback, SquirrelDebugFileContext[] ctxs)
@@ -595,6 +597,16 @@ namespace VisualSquirrel.Debugger.Engine
                         DebuggerEvent(this, ed);
                     }
                     break;
+                case "print": //gonuts print to output window
+                    if (DebuggerEvent != null)
+                    {
+                        DebuggerEventDesc ed = new DebuggerEventDesc();
+                        ed.EventType = "print";
+                        ed.Error = doc.DocumentElement.GetAttribute("line");
+                        DebuggerEvent(this, ed);
+                        break; 
+                    }
+                    break;
                 default:
                     if (DebuggerEvent != null)
                     {
@@ -625,6 +637,8 @@ namespace VisualSquirrel.Debugger.Engine
         }
         public void Ready()
         {
+            if (gonuts)
+                SendPacket("xt GoNuts"); //xt = activate debugger extension capability. 
             SendPacket("rd");
         }
         public void Terminate()

@@ -152,6 +152,7 @@ namespace VisualSquirrel
                     {
                         ProjectNode spn = p.Project as ProjectNode;
                         string pathfixup = spn.GetProjectProperty(Resources.PathFixup);//.BuildProject.EvaluatedProperties;
+                        
                         if (string.IsNullOrEmpty(pathfixup))
                             continue;
                         //string pathfixup = (string)bpg["PathFixup"];
@@ -182,7 +183,7 @@ namespace VisualSquirrel
                 //string pathfixup;
                 bool suspendonstartup = false;
                 bool autoruninterpreter = true;
-
+                bool gonutsextension = false;
                 string projectfolder = ProjectMgr.ProjectFolder;
                 interpreter = FetchStringProperty("Interpreter", "");
                 if (string.IsNullOrEmpty(interpreter) || !File.Exists(interpreter))
@@ -190,7 +191,7 @@ namespace VisualSquirrel
                 workingdirectory = FetchStringProperty("WorkingDirectory", Path.GetDirectoryName(interpreter));
                 suspendonstartup = FetchBoolProperty("SuspendOnStartup", false);
                 autoruninterpreter = FetchBoolProperty("AutorunInterpreter", true);
-
+                gonutsextension = FetchBoolProperty("GonutsExtension", false);
                 localhost = FetchBoolProperty("Localhost", true);
                 targetaddress = FetchStringProperty("TargetAddress", "127.0.0.1");
                 //string pathfixup = FetchStringProperty("PathFixup", "");
@@ -218,6 +219,7 @@ namespace VisualSquirrel
                 w.WriteAttributeString("suspendonstartup", suspendonstartup.ToString());
                 w.WriteAttributeString("connectiondelay", connectiondelay.ToString());
                 w.WriteAttributeString("connectiontries", connectiontries.ToString());
+                w.WriteAttributeString("gonutsextension", gonutsextension.ToString());
                 foreach (KeyValuePair<string, string> kv in pns)
                 {
                     w.WriteStartElement("context");

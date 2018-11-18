@@ -49,6 +49,7 @@ namespace VisualSquirrel.Debugger.Engine
         public string IpAddress = "127.0.0.1";
         public int IpPort = 1234;
         public bool SuspendOnStartup = false;
+        public bool Gonuts = false;
         public SquirrelDebugFileContext[] FileContexts;
         //public string PathFixup = "";
         //public string ProjectFolder = "";
@@ -803,6 +804,9 @@ namespace VisualSquirrel.Debugger.Engine
                     break;
                 case "addbreakpoint":
                     engineCallback.OnOutputString( String.Format("DEBUGGER EVENT : {0}\n", ed.EventType )  );
+                    break;
+                case "print": //gonuts extension, but safe here
+                    Console.Out.WriteLine(ed.Error);
                     break;
                 default:
                     engineCallback.OnOutputString("DEBUGGER EVENT : " + ed.EventType + "<UNHANDLED>\n");

@@ -32,7 +32,7 @@ namespace VisualSquirrel
 
         internal const string PathFixup = "PathFixup";
         internal const string PathFixupDescription = "PathFixupDescription";
-
+        internal const string GonutsExtension = "Gonuts";
         internal const string CommandLineOptionsDescription = "CommandLineOptionsDescription";
         internal const string SuspendOnStartup = "SuspendOnStartup";
         internal const string SuspendOnStartupDescription = "SuspendOnStartupDescription";
